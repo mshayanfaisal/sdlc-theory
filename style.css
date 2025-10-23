@@ -1,0 +1,592 @@
+:root {
+    --primary: #BF092F;
+    --primary-hover: #9a0726;
+    --dark: #0a1628;
+    --medium: #16476A;
+    --accent: #3B9797;
+    --accent-hover: #2d7a7a;
+    --light: #f8fafc;
+    --white: #ffffff;
+    --gray-100: #f1f5f9;
+    --gray-200: #e2e8f0;
+    --gray-300: #cbd5e1;
+    --gray-700: #334155;
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.08);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+    --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15), 0 10px 10px rgba(0, 0, 0, 0.04);
+    --gradient-primary: linear-gradient(135deg, #BF092F 0%, #d41842 100%);
+    --gradient-accent: linear-gradient(135deg, #3B9797 0%, #4db8b8 100%);
+  }
+  
+  * {
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    margin: 0;
+    padding: 0;
+    color: var(--dark);
+    line-height: 1.6;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+  }
+  
+  body::before {
+    content: "";
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 20% 50%, rgba(59, 151, 151, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(191, 9, 47, 0.08) 0%, transparent 50%);
+    animation: bgShift 20s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 0;
+  }
+  
+  @keyframes bgShift {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    50% { transform: translate(5%, 5%) rotate(5deg); }
+  }
+  
+  .container {
+    position: relative;
+    z-index: 1;
+    width: min(920px, 95%);
+    background: var(--white);
+    margin: 40px auto;
+    padding: clamp(24px, 5vw, 48px);
+    border-radius: 24px;
+    box-shadow: var(--shadow-xl);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .container:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 25px 35px rgba(0, 0, 0, 0.18), 0 15px 15px rgba(0, 0, 0, 0.06);
+  }
+  
+  /* ===================== */
+  /* Modern Navigation */
+  /* ===================== */
+  nav {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 40px;
+    padding: 8px;
+    background: var(--dark);
+    border-radius: 16px;
+    box-shadow: var(--shadow-md);
+    position: relative;
+    overflow: visible;
+  }
+  
+  nav::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    background: var(--gradient-accent);
+    border-radius: 18px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+  }
+  
+  nav:hover::before {
+    opacity: 0.4;
+  }
+  
+  nav a {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.8);
+    padding: 12px 24px;
+    display: block;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-weight: 500;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+    letter-spacing: 0.3px;
+  }
+  
+  nav a::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--gradient-primary);
+    transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: -1;
+  }
+  
+  nav a:hover,
+  nav a.active {
+    color: var(--white);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+  
+  nav a:hover::before,
+  nav a.active::before {
+    left: 0;
+  }
+  
+  /* ===================== */
+  /* Typography */
+  /* ===================== */
+  h1,
+  h2 {
+    text-align: center;
+    color: var(--dark);
+    letter-spacing: -0.5px;
+    font-weight: 700;
+    margin-bottom: 0.5em;
+    background: linear-gradient(135deg, var(--dark) 0%, var(--medium) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  h1 {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    animation: fadeInDown 0.6s ease;
+  }
+  
+  h2 {
+    font-size: clamp(1.4rem, 3vw, 1.8rem);
+    animation: fadeInDown 0.7s ease;
+  }
+  
+  @keyframes fadeInDown {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* ===================== */
+  /* Animated Gradient Border */
+  /* ===================== */
+  .form-box {
+    --angle: 0deg;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3px;
+    border-radius: 20px;
+    background: linear-gradient(#fff, #fff) padding-box,
+                conic-gradient(from var(--angle), 
+                  #BF092F, #d41842, #16476A, #2d7a7a, #3B9797, #4db8b8, #BF092F) border-box;
+    border: 3px solid transparent;
+    animation: rotate 8s linear infinite, pulse 3s ease-in-out infinite;
+    box-shadow: 0 0 30px rgba(59, 151, 151, 0.4), var(--shadow-lg);
+    position: relative;
+  }
+  
+  .form-box::before {
+    content: "";
+    position: absolute;
+    inset: -10px;
+    background: conic-gradient(from var(--angle), 
+      rgba(191, 9, 47, 0.3), rgba(59, 151, 151, 0.3), rgba(191, 9, 47, 0.3));
+    border-radius: 24px;
+    filter: blur(20px);
+    opacity: 0.6;
+    z-index: -1;
+    animation: rotate 8s linear infinite;
+  }
+  
+  @keyframes rotate {
+    to {
+      --angle: 360deg;
+    }
+  }
+  
+  @keyframes pulse {
+    0%, 100% {
+      box-shadow: 0 0 30px rgba(59, 151, 151, 0.4), var(--shadow-lg);
+    }
+    50% {
+      box-shadow: 0 0 45px rgba(191, 9, 47, 0.5), var(--shadow-xl);
+    }
+  }
+  
+  @property --angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+  }
+  
+  /* ===================== */
+  /* Modern Form Styling */
+  /* ===================== */
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    border-radius: 18px;
+    padding: clamp(24px, 4vw, 36px);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+    max-width: 600px;
+    margin: 20px auto;
+    animation: fadeIn 0.5s ease;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  form label {
+    font-weight: 600;
+    color: var(--medium);
+    margin-bottom: 6px;
+    letter-spacing: 0.3px;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    display: block;
+  }
+  
+  form input[type="text"],
+  form input[type="date"] {
+    padding: 14px 18px;
+    border: 2px solid var(--gray-200);
+    border-radius: 12px;
+    font-size: 15px;
+    color: var(--dark);
+    background: var(--white);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-family: inherit;
+    width: 100%;
+  }
+  
+  form input[type="text"]:hover,
+  form input[type="date"]:hover {
+    border-color: var(--gray-300);
+  }
+  
+  form input[type="text"]:focus,
+  form input[type="date"]:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px rgba(59, 151, 151, 0.1), var(--shadow-sm);
+    outline: none;
+    transform: translateY(-1px);
+  }
+  
+  form button {
+    align-self: center;
+    padding: 14px 36px;
+    background: var(--gradient-primary);
+    color: var(--white);
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: var(--shadow-md);
+    position: relative;
+    overflow: hidden;
+    letter-spacing: 0.5px;
+  }
+  
+  form button::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+  }
+  
+  form button:hover {
+    background: var(--gradient-accent);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+  }
+  
+  form button:hover::before {
+    width: 300px;
+    height: 300px;
+  }
+  
+  form button:active {
+    transform: translateY(-1px);
+  }
+  
+  /* ===================== */
+  /* Modern Table Design */
+  /* ===================== */
+  table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-top: 30px;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    animation: slideUp 0.6s ease;
+  }
+  
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  thead {
+    background: linear-gradient(135deg, var(--medium) 0%, var(--accent) 100%);
+  }
+  
+  th {
+    color: var(--white);
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    font-weight: 700;
+    padding: 18px 16px;
+    text-align: left;
+    position: relative;
+  }
+  
+  th::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.3);
+  }
+  
+  td {
+    padding: 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--gray-200);
+  }
+  
+  tbody tr {
+    background: var(--white);
+    transition: all 0.3s ease;
+  }
+  
+  tbody tr:nth-child(even) {
+    background: var(--gray-100);
+  }
+  
+  tbody tr:hover {
+    background: rgba(59, 151, 151, 0.08);
+    transform: scale(1.01);
+    box-shadow: var(--shadow-sm);
+  }
+  
+  /* ===================== */
+  /* Modern Button Styles */
+  /* ===================== */
+  .btn {
+    padding: 10px 16px;
+    margin-right: 8px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: inline-block;
+    letter-spacing: 0.3px;
+    box-shadow: var(--shadow-sm);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .btn::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.5s, height 0.5s;
+  }
+  
+  .btn:hover::before {
+    width: 200px;
+    height: 200px;
+  }
+  
+  .btn.delete {
+    background: var(--gradient-primary);
+    color: var(--white);
+    border: none;
+  }
+  
+  .btn.detail {
+    background: var(--gradient-accent);
+    color: var(--white);
+  }
+  
+  .btn.status {
+    background: linear-gradient(135deg, var(--medium) 0%, #1e5a7d 100%);
+    color: var(--white);
+    border: none;
+    cursor: pointer;
+  }
+  
+  .btn.delete:hover {
+    background: linear-gradient(135deg, #a10726 0%, #c00830 100%);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+  
+  .btn.detail:hover {
+    background: linear-gradient(135deg, #2d7a7a 0%, #368e8e 100%);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+  
+  .btn.status:hover {
+    background: linear-gradient(135deg, #103759 0%, #1a4d70 100%);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+  
+  /* ===================== */
+  /* Detail Box Glassmorphism */
+  /* ===================== */
+  .detail-box {
+    padding: 28px;
+    background: linear-gradient(135deg, rgba(59, 151, 151, 0.1) 0%, rgba(59, 151, 151, 0.05) 100%);
+    border-left: 5px solid var(--accent);
+    border-radius: 16px;
+    margin-bottom: 24px;
+    box-shadow: var(--shadow-sm);
+    backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+    animation: fadeIn 0.5s ease;
+  }
+  
+  .detail-box::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(59, 151, 151, 0.1) 0%, transparent 70%);
+    animation: rotate 15s linear infinite;
+  }
+  
+  .back-btn {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 12px 28px;
+    text-decoration: none;
+    color: var(--medium);
+    text-align: center;
+    font-weight: 600;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 2px solid var(--medium);
+    border-radius: 12px;
+    background: transparent;
+    letter-spacing: 0.5px;
+  }
+  
+  .back-btn:hover {
+    color: var(--white);
+    background: var(--gradient-primary);
+    border-color: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+  
+  /* ===================== */
+  /* Responsive Design */
+  /* ===================== */
+  @media (max-width: 768px) {
+    .container {
+      margin: 20px auto;
+      padding: 20px;
+      border-radius: 20px;
+    }
+  
+    nav {
+      flex-direction: column;
+      gap: 4px;
+    }
+  
+    nav a {
+      text-align: center;
+    }
+  
+    table {
+      font-size: 14px;
+    }
+  
+    th, td {
+      padding: 12px 8px;
+    }
+  
+    .btn {
+      padding: 8px 12px;
+      font-size: 12px;
+      margin-bottom: 4px;
+    }
+  }
+  
+  /* ===================== */
+  /* Smooth Scroll */
+  /* ===================== */
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  /* ===================== */
+  /* Loading Animation */
+  /* ===================== */
+  @keyframes shimmer {
+    0% {
+      background-position: -1000px 0;
+    }
+    100% {
+      background-position: 1000px 0;
+    }
+  }
+  
+  .loading {
+    animation: shimmer 2s infinite;
+    background: linear-gradient(
+      to right,
+      var(--gray-200) 0%,
+      var(--gray-300) 20%,
+      var(--gray-200) 40%,
+      var(--gray-200) 100%
+    );
+    background-size: 1000px 100%;
+  }
